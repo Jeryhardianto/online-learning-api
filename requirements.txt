@@ -1,0 +1,11 @@
+# pip install -r requirements.txt
+fastapi[standard]
+uvicorn
+sqlalchemy 
+bcrypt
+passlib
+python-multipart
+pyjwt
+pandas
+mysql-connector-python
+psycopg2-binary

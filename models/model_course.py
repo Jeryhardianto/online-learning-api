@@ -13,6 +13,7 @@ class Course(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String(255), nullable=False)
     description = Column(Text, nullable=True)
+    image = Column(String(255), nullable=True)
     instructor_id  = Column(Integer, ForeignKey("instructors.id"), nullable=False)
     price = Column(Numeric(precision=10, scale=2), nullable=False)
     difiiculty = Column(Enum(DifficultyLevel), nullable=True)

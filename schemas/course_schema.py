@@ -10,6 +10,7 @@ class Course(BaseModel):
     title: str
     description: str
     instructor_id: int
+    image: str | None
     price: float
     difiiculty: str
     is_published: int
@@ -18,7 +19,7 @@ class Course(BaseModel):
     class Config:
         from_attributes = True
 
-class TodoCreate(BaseModel):
+class CourseCreate(BaseModel):
     title: str
     description: str
     instructor_id: int
@@ -26,7 +27,7 @@ class TodoCreate(BaseModel):
     difiiculty: DifficultyLevel
     is_published: int
 
-class TodoUpdate(BaseModel):
+class CourseUpdate(BaseModel):
     title: str
     description: str
     instructor_id: int
@@ -34,7 +35,13 @@ class TodoUpdate(BaseModel):
     difiiculty: DifficultyLevel
     is_published: int
 
-class OutputTransactionPage(BasePage):
+class CourseImage(BaseModel):
+    id : int
+    image: str
+    class Config:
+        from_attributes = True
+
+class OutputCoursePage(BasePage):
     data: List[Course]
     
     class Config:

@@ -12,7 +12,7 @@ from services.service_jwt import ServiceJwt
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 @router.post("/register")
-def register(
+async def register(
   user_input: UserCreate,
   session: Session = Depends(get_db)
 ):
@@ -22,7 +22,7 @@ def register(
 
 
 @router.post("/login")
-def login(
+async def login(
   form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
   session: Session = Depends(get_db)
 ):

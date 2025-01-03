@@ -2,8 +2,6 @@ import math
 from datetime import datetime, timedelta
 from typing import Optional
 
-import pandas
-
 from fastapi import Depends, HTTPException
 from enums.enum_tipe import IsDone
 from models.model_todo import Todo as TodoModel

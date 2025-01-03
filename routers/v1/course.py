@@ -15,7 +15,7 @@ from services.service_course import ServiceCourse
 router = APIRouter(prefix="/course", tags=["Courses"])
 
 @router.get("")
-async def get_all_todo(
+async def get_all_course(
     current_user: Annotated[TokenData, Depends(get_current_user)],
     page: int = 0,
     size: int = 10,
@@ -42,16 +42,6 @@ async def insert_course(
   service_course = ServiceCourse(session)
   return service_course.insert(input_course)
 
-@router.put("/{id}")
-def update_todo(
-    id: int,
-    input_course: CourseUpdate,
-    current_user: Annotated[TokenData, Depends(get_current_user)],
-    session: Session = Depends(get_db)
-):
-    service_course = ServiceCourse(session)
-    return service_course.update(id, input_course)
-
 @router.post("/{id}/upload_image")
 def upload_image(
     id: int,
@@ -62,8 +52,18 @@ def upload_image(
     service_course = ServiceCourse(session)
     return service_course.upload_image(id, image)
 
+@router.put("/{id}")
+def update_course(
+    id: int,
+    input_course: CourseUpdate,
+    current_user: Annotated[TokenData, Depends(get_current_user)],
+    session: Session = Depends(get_db)
+):
+    service_course = ServiceCourse(session)
+    return service_course.update(id, input_course)
+
 @router.delete("/{id}")
-def delete_todo(
+def delete_course(
     id: int,
     current_user: Annotated[TokenData, Depends(get_current_user)],
     session: Session = Depends(get_db)

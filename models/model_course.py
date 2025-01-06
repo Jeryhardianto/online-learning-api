@@ -22,3 +22,4 @@ class Course(Base):
     updated_at = Column(DateTime, default=datetime.utcnow)
 
     instructor = relationship('Instructor', back_populates='courses')
+    enrollments = relationship('Enrollment', back_populates='course')

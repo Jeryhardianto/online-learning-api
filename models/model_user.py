@@ -18,3 +18,4 @@ class User(Base):
     updated_at = Column(DateTime, default=datetime.utcnow)
 
     todos = relationship("Todo", back_populates="users")
+    enrollments = relationship('Enrollment', back_populates='user')

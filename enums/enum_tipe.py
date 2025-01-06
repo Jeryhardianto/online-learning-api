@@ -11,3 +11,8 @@ class DifficultyLevel(str, Enum):
     EASY = "Easy"
     MEDIUM = "Medium"
     HARD = "Hard"
+
+class EnrollmentStatus(str, Enum):
+    ENROLLED = "enrolled"
+    COMPLETED = "completed"
+    CANCELLED = "cancelled"

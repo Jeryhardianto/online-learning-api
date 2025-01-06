@@ -11,3 +11,5 @@ mysql-connector-python
 psycopg2-binary
 python-magic
 python-multipart
+pytest
+httpx

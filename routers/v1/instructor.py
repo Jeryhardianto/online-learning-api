@@ -13,7 +13,7 @@ from services.service_instructor import ServiceInstructor
 router = APIRouter(prefix="/instructor", tags=["Instrcutors"])
 
 @router.get("")
-async def get_all_todo(
+async def get_all_instructor(
     current_user: Annotated[TokenData, Depends(get_current_user)],
     page: int = 0,  
     size: int = 10,
@@ -41,7 +41,7 @@ async def insert_instructor(
   return service_instructor.insert(input_instructor)
 
 @router.put("/{id}")
-def update_instructor(
+async def update_instructor(
     id: int,
     input_instructor: InsructorUpdate,
     current_user: Annotated[TokenData, Depends(get_current_user)],
@@ -51,7 +51,7 @@ def update_instructor(
     return service_instructor.update(id, input_instructor)
 
 @router.delete("/{id}")
-def delete_instructor(
+async def delete_instructor(
     id: int,
     current_user: Annotated[TokenData, Depends(get_current_user)],
     session: Session = Depends(get_db)

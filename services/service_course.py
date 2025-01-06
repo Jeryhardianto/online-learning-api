@@ -59,8 +59,9 @@ class ServiceCourse:
                 created_at=datetime.now(),
                 updated_at=datetime.now()
            )
-           self.repository_course.store_course(course)
+           courseId = self.repository_course.store_course(course)
            course = CourseSchema.from_orm(course).dict()
+           course["course_id"] = courseId    
            return Response(success=True, message="Course created", data=course)   
        except Exception as e:
             raise HTTPException(status_code=400, detail=str(e))

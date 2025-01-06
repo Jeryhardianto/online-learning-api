@@ -31,7 +31,7 @@ class RepositoryCourse:
       self.session.add(course)
       self.session.commit()
       self.session.refresh(course)
-      return course
+      return course.id
   
   def update(self, id: int, data: CourseUpdate):
       course = self.get_by_id(id)

@@ -4,6 +4,8 @@ from models.model_instructors import Instructor
 from models.model_todo import Todo
 from models.model_user import User
 from models.model_enroll import Enrollment
+from models.model_module import Module
+from models.model_lesson import Lesson
 
 
 def create_tables():
@@ -15,4 +17,7 @@ def create_tables():
     Course.metadata.create_all(bind=engine)
     Instructor.metadata.create_all(bind=engine)
     Enrollment.metadata.create_all(bind=engine)
+    Module.metadata.create_all(bind=engine)
+    Lesson.metadata.create_all(bind=engine)
+
     

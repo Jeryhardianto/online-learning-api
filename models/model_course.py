@@ -23,3 +23,4 @@ class Course(Base):
 
     instructor = relationship('Instructor', back_populates='courses')
     enrollments = relationship('Enrollment', back_populates='course')
+    modules = relationship('Module', back_populates='course')

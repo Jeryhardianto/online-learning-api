@@ -73,17 +73,14 @@ class ServiceLesson:
         except Exception as e:
             raise HTTPException(status_code=400, detail="Internal server error")
         
-    # def delete(self, id: int, course_id: int):
-    #     print()
-    #     module = self.repository_module.get_by_id(id, course_id)
-    #     if module is None:
-    #         raise HTTPException(status_code=404, detail="Module not found")
-    #     try:
-    #         module = self.repository_module.delete(id, course_id)
-    #         module = ModuleSchema.from_orm(module).dict()
-    #         return Response(success=True, message="Module deleted", data=module)
-    #     except Exception as e:
-    #         print(e)
-    #         raise HTTPException(status_code=400, detail="Internal server error")
-        
-    
+    def delete(self, id: int, module_id: int):
+        module = self.repository_module.get_by_id(module_id)
+        if not module:
+            raise HTTPException(status_code=404, detail="Module not found")
+        try:
+            lesson = self.repository_lesson.delete(id, module_id)
+            lesson = LessonSchema.from_orm(lesson).dict()
+            return Response(success=True, message="Lesson deleted", data=lesson)
+        except Exception as e:
+            print(e)
+            raise HTTPException(status_code=400, detail="Internal server error")

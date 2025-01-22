@@ -49,9 +49,9 @@ class RepositoryLesson:
       self.session.commit()
       self.session.refresh(lesson)
       return lesson
-  
-#   def delete(self, id: int, course_id: int):
-#       module = self.get_by_id(id, course_id)
-#       self.session.delete(module)
-#       self.session.commit()
-#       return module
+
+  def delete(self, id: int, module_id: int):
+      lesson = self.get_by_id_module_id(id, module_id)
+      self.session.delete(lesson)
+      self.session.commit()
+      return lesson

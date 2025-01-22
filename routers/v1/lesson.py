@@ -46,12 +46,12 @@ async def update_lesson(
   service_lesson = ServiceLesson(session)
   return service_lesson.update(input_lesson, module_id, id)
 
-# @router.delete("/{id}/course/{course_id}")
-# async def delete_module(
-#    id: int,
-#    course_id: int,
-#    current_user: Annotated[TokenData, Depends(get_current_user)],
-#    session: Session = Depends(get_db)
-# ):
-#   service_module = ServiceModule(session)
-#   return service_module.delete(id, course_id)
+@router.delete("/{id}/module/{module_id}")
+async def delete_module(
+   id: int,
+   module_id: int,
+   current_user: Annotated[TokenData, Depends(get_current_user)],
+   session: Session = Depends(get_db)
+):
+  service_lesson = ServiceLesson(session)
+  return service_lesson.delete(id, module_id)

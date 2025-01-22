@@ -78,7 +78,6 @@ class ServiceModule:
             module = ModuleSchema.from_orm(module).dict()
             return Response(success=True, message="Module deleted", data=module)
         except Exception as e:
-            print(e)
             raise HTTPException(status_code=400, detail="Internal server error")
         
     

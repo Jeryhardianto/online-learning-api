@@ -57,7 +57,6 @@ class ServiceLesson:
            lesson = LessonSchema.from_orm(lesson).dict()
            return Response(success=True, message="Lesson created", data=lesson)   
        except Exception as e:
-            print(e)
             raise HTTPException(status_code=400, detail="Internal server error")
     
     def update( 
@@ -82,5 +81,4 @@ class ServiceLesson:
             lesson = LessonSchema.from_orm(lesson).dict()
             return Response(success=True, message="Lesson deleted", data=lesson)
         except Exception as e:
-            print(e)
-            raise HTTPException(status_code=400, detail="Internal server error")
+            raise HTTPException(status_code=400, detail="Internal server error")    

@@ -7,6 +7,8 @@ from models.model_enroll import Enrollment
 from models.model_module import Module
 from models.model_lesson import Lesson
 from models.model_quiz import Quiz
+from models.model_question import Question
+from models.model_answre import Answre
 
 
 def create_tables():
@@ -21,5 +23,7 @@ def create_tables():
     Module.metadata.create_all(bind=engine)
     Lesson.metadata.create_all(bind=engine)
     Quiz.metadata.create_all(bind=engine)
+    Question.metadata.create_all(bind=engine)
+    Answre.metadata.create_all(bind=engine)
 
     

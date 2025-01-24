@@ -15,3 +15,5 @@ class Quiz(Base):
     updated_at = Column(DateTime, default=datetime.utcnow)
 
     module = relationship('Module', back_populates='quizzes')
+    questions = relationship('Question', back_populates='quiz')
+    questions = relationship('Question', back_populates='quiz')

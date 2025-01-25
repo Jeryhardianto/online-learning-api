@@ -5,9 +5,10 @@ from schemas.enroll_schema import EnrollComplate, EnrollCreate
 from schemas.instructor_schema import InsructorCreate, InsructorUpdate
 from schemas.lesson_schema import LessonCreate, LessonUpdate
 from schemas.module_schema import ModuleCreate, ModuleUpdate
-from schemas.question_schema import QuestionCreate, QuestionUpdate
+from schemas.question_schema import AnswerCreate, QuestionCreate, QuestionUpdate
 from schemas.quiz_schema import QuizCreate, QuizUpdate
 from models.model_question import Question as QuestionModel
+from models.model_answer import Answer as AnswerModel
 
 
 class RepositoryQuestion:
@@ -49,3 +50,46 @@ class RepositoryQuestion:
       self.session.delete(question)
       self.session.commit()
       return question
+  def get_answer_by_id(self, id: int):
+      return self.session.query(AnswerModel).filter(AnswerModel.id == id).first()
+  
+  def store_answer(self, data: AnswerCreate, question_id: int):
+      answer = AnswerModel(
+        question_id=question_id,
+        option_text=data.option_text,
+        is_correct=data.is_correct,
+        created_at=datetime.now(),
+        updated_at=datetime.now()
+      )
+      self.session.add(answer)
+      self.session.commit()
+      self.session.refresh(answer)
+      return answer 
+  def update_answer(self, data: AnswerCreate, id: int):
+      answer = self.get_answer_by_id(id)
+      answer.option_text = data.option_text
+      answer.is_correct = data.is_correct
+      answer.updated_at = datetime.now()
+      self.session.commit()
+      return answer
+  def delete_answer(self, id: int):
+        answer = self.get_answer_by_id(id)
+        self.session.delete(answer)
+        self.session.commit()
+        return answer
+  #   insert batch answer
+  def store_answers(self, data: List[AnswerCreate], question_id: int):
+      answers = []
+      for answer in data:
+          answer = AnswerModel(
+              question_id=question_id,
+              option_text=answer.option_text,
+              is_correct=answer.is_correct,
+              created_at=datetime.now(),
+              updated_at=datetime.now()
+          )
+          self.session.add(answer)
+          self.session.commit()
+          self.session.refresh(answer)
+          answers.append(answer)
+      return answers

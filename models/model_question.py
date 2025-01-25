@@ -15,4 +15,4 @@ class Question(Base):
     updated_at = Column(DateTime, default=datetime.utcnow)
 
     quiz = relationship('Quiz', back_populates='questions')
-    options = relationship('Answre', back_populates='question')
+    answers = relationship('Answer', back_populates='question')

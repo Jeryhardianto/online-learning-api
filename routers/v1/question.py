@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import List
 from typing_extensions import Annotated
 from fastapi import APIRouter, Depends
 
@@ -6,7 +7,7 @@ from config.config import get_db
 from schemas.instructor_schema import InsructorCreate, InsructorUpdate
 from schemas.common_shcema import TokenData
 from schemas.lesson_schema import LessonCreate, LessonUpdate
-from schemas.question_schema import QuestionCreate, QuestionUpdate
+from schemas.question_schema import AnswerCreate, QuestionCreate, QuestionUpdate
 from schemas.quiz_schema import QuizCreate, QuizUpdate
 from services.service_common import get_current_user
 from sqlalchemy.orm import Session
@@ -56,3 +57,41 @@ async def delete_question(
 ):
   service_question = ServiceQuestion(session)
   return service_question.delete(id)
+
+@router.post("/{question_id}/answer")
+async def insert_answer(
+   question_id: int,
+   input_answer: AnswerCreate,
+   current_user: Annotated[TokenData, Depends(get_current_user)],
+   session: Session = Depends(get_db)
+):
+  service_question = ServiceQuestion(session)
+  return service_question.insert_answer(input_answer, question_id)
+
+@router.put("/{answer_id}/answer")
+async def update_answer(
+   answer_id: int,
+   input_answer: AnswerCreate,
+   current_user: Annotated[TokenData, Depends(get_current_user)],
+   session: Session = Depends(get_db)
+):
+  service_question = ServiceQuestion(session)
+  return service_question.update_answer(input_answer, answer_id)
+@router.delete("/{answer_id}/answer")
+async def delete_answer(
+   answer_id: int,
+   current_user: Annotated[TokenData, Depends(get_current_user)],
+   session: Session = Depends(get_db)
+):
+  service_question = ServiceQuestion(session)
+  return service_question.delete_answer(answer_id)
+# insert batch answer
+@router.post("/{question_id}/answers")
+async def insert_batch_answer(
+   question_id: int,
+   input_answer: List[AnswerCreate],
+   current_user: Annotated[TokenData, Depends(get_current_user)],
+   session: Session = Depends(get_db)
+):
+  service_question = ServiceQuestion(session)
+  return service_question.insert_batch_answer(input_answer, question_id)

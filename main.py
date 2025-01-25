@@ -2,6 +2,7 @@ import signal
 from fastapi import FastAPI
 from utils.init_db import create_tables
 from routers.api import router
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     debug=True,
@@ -22,8 +23,18 @@ def on_startup() -> None:
     create_tables()
     signal.signal(signal.SIGINT, stop_server)
 
+origins = [
+    "http://localhost",
+    "http://localhost:3000",
+    "http://localhost:8000"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(router)
-
-
-
